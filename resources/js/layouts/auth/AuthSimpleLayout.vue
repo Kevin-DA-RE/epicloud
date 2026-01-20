@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
-import { home } from '@/routes';
-import { Link } from '@inertiajs/vue3';
-
 defineProps<{
     title?: string;
     description?: string;
@@ -11,33 +7,42 @@ defineProps<{
 
 <template>
     <div
-        class="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10"
+        class="flex min-h-svh [animation:gradient-shift_12s_ease_infinite] flex-col items-center justify-center gap-6 bg-background bg-gradient-to-br from-slate-950 via-purple-900 to-indigo-950 bg-[length:200%_200%] p-6 md:p-10"
     >
-        <div class="w-full max-w-sm">
-            <div class="flex flex-col gap-8">
-                <div class="flex flex-col items-center gap-4">
-                    <Link
-                        :href="home()"
-                        class="flex flex-col items-center gap-2 font-medium"
+        <div class="flex w-screen flex-col gap-2">
+            <div
+                class="mb-8 animate-in space-y-2 text-center duration-1000 fade-in slide-in-from-bottom-4"
+            >
+                <div class="mx-auto flex items-center justify-center">
+                    <h1
+                        class="ml-2 text-4xl font-medium tracking-wide text-purple-100 md:text-5xl"
+                        style="font-family: pacifico; font-style: italic"
                     >
-                        <div
-                            class="mb-1 flex h-9 w-9 items-center justify-center rounded-md"
-                        >
-                            <AppLogoIcon
-                                class="size-9 fill-current text-[var(--foreground)] dark:text-white"
-                            />
-                        </div>
-                        <span class="sr-only">{{ title }}</span>
-                    </Link>
-                    <div class="space-y-2 text-center">
-                        <h1 class="text-xl font-medium">{{ title }}</h1>
-                        <p class="text-center text-sm text-muted-foreground">
-                            {{ description }}
-                        </p>
-                    </div>
+                        Créer un compte
+                    </h1>
                 </div>
-                <slot />
+                <div
+                    class="mx-auto h-px w-32 bg-gradient-to-r from-transparent via-purple-400/50 to-transparent"
+                ></div>
+                <p
+                    class="text-sm font-light tracking-[0.2em] text-purple-300/60 uppercase"
+                >
+                    <span class="text-3xl drop-shadow-md filter">🔐</span>
+                    Accès sécurisé
+                </p>
             </div>
+            <slot />
         </div>
     </div>
 </template>
+<style>
+@keyframes gradient-shift {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+</style>

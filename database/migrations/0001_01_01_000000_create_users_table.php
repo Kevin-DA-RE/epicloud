@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->string('patient');
-            $table->date('patient_age');
-            $table->integer('patient_size');
-            $table->integer('patient_weight');
+            $table->string('patient')->nullable();
+            $table->date('patient_age')->nullable();
+            $table->integer('patient_size')->nullable();
+            $table->integer('patient_weight')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
