@@ -12,6 +12,8 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\RegisterResponse;
+use Illuminate\Support\Facades\Auth;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -19,10 +21,20 @@ class FortifyServiceProvider extends ServiceProvider
      * Register any application services.
      */
     public function register(): void
-    {
-        //
-    }
+{
+        // On intercepte la réponse après l'inscription
+        $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
+            public function toResponse($request)
+            {
+                // On déconnecte l'utilisateur que Fortify vient de créer
+                Auth::logout();
 
+                // On redirige vers la page de login (Inertia gèrera la redirection)
+                return redirect()->route('login')
+                    ->with('status', 'Votre compte a été créé avec succès. Veuillez vous connecter.');
+            }
+        });
+    }
     /**
      * Bootstrap any application services.
      */
