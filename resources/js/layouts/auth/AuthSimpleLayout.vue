@@ -1,8 +1,22 @@
-<script setup lang="ts">
-defineProps<{
-    title?: string;
-    description?: string;
-}>();
+<script setup>
+import { ref } from 'vue';
+const props = defineProps({
+    code: String,
+});
+
+const title = ref();
+const description = ref();
+
+switch (props.code) {
+    case 'register':
+        title.value = 'Créer un compte';
+        description.value = 'Accès sécurisé';
+        break;
+    case 'login':
+        title.value = 'Se connecter';
+        description.value = 'Connection à votre compte';
+        break;
+}
 </script>
 
 <template>
@@ -18,7 +32,7 @@ defineProps<{
                         class="ml-2 text-4xl font-medium tracking-wide text-purple-100 md:text-5xl"
                         style="font-family: pacifico; font-style: italic"
                     >
-                        Créer un compte
+                        {{ title }}
                     </h1>
                 </div>
                 <div
@@ -28,7 +42,7 @@ defineProps<{
                     class="text-sm font-light tracking-[0.2em] text-purple-300/60 uppercase"
                 >
                     <span class="text-3xl drop-shadow-md filter">🔐</span>
-                    Accès sécurisé
+                    {{ description }}
                 </p>
             </div>
             <slot />

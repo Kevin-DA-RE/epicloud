@@ -9,12 +9,15 @@ import AuthBase from '@/layouts/AuthLayout.vue';
 import { login } from '@/routes';
 import { store } from '@/routes/register';
 import { Form, Head } from '@inertiajs/vue3';
+
+const props = defineProps({
+    code: String,
+});
 </script>
 
 <template>
     <AuthBase
-        title="Create an account"
-        description="Enter your details below to create your account"
+        :code="code"
     >
         <Head title="Creer un compte" />
         <div

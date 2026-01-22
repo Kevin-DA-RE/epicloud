@@ -30,8 +30,7 @@ class FortifyServiceProvider extends ServiceProvider
                 Auth::logout();
 
                 // On redirige vers la page de login (Inertia gèrera la redirection)
-                return redirect()->route('login')
-                    ->with('status', 'Votre compte a été créé avec succès. Veuillez vous connecter.');
+                return redirect()->route('login');
             }
         });
     }
@@ -62,7 +61,7 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::loginView(fn (Request $request) => Inertia::render('auth/Login', [
             'canResetPassword' => Features::enabled(Features::resetPasswords()),
             'canRegister' => Features::enabled(Features::registration()),
-            'status' => $request->session()->get('status'),
+             'code' => 'login',
         ]));
 
         Fortify::resetPasswordView(fn (Request $request) => Inertia::render('auth/ResetPassword', [
@@ -78,7 +77,9 @@ class FortifyServiceProvider extends ServiceProvider
             'status' => $request->session()->get('status'),
         ]));
 
-        Fortify::registerView(fn () => Inertia::render('auth/Register'));
+        Fortify::registerView(fn () => Inertia::render('auth/Register', [
+            'code' => 'register',
+        ]));
 
         Fortify::twoFactorChallengeView(fn () => Inertia::render('auth/TwoFactorChallenge'));
 

@@ -12,27 +12,19 @@ import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 import { Form, Head } from '@inertiajs/vue3';
 
-defineProps<{
-    status?: string;
-    canResetPassword: boolean;
-    canRegister: boolean;
-}>();
+const props = defineProps({
+    code: String,
+    canResetPassword: Boolean,
+    canRegister: Boolean,
+});
 </script>
 
 <template>
     <AuthBase
-        title="Log in to your account"
-        description="Enter your email and password below to log in"
+        :code="props.code"
     >
-        <Head title="Log in" />
-
-        <div
-            v-if="status"
-            class="mb-4 text-center text-sm font-medium text-green-600"
-        >
-            {{ status }}
-        </div>
-
+        <Head title="Connection" />
+        
         <Form
             v-bind="store.form()"
             :reset-on-success="['password']"
@@ -59,7 +51,7 @@ defineProps<{
                     <div class="flex items-center justify-between">
                         <Label for="password">Password</Label>
                         <TextLink
-                            v-if="canResetPassword"
+                            v-if="props.canResetPassword"
                             :href="request()"
                             class="text-sm"
                             :tabindex="5"
@@ -100,7 +92,7 @@ defineProps<{
 
             <div
                 class="text-center text-sm text-muted-foreground"
-                v-if="canRegister"
+                v-if="props.canRegister"
             >
                 Don't have an account?
                 <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
