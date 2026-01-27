@@ -20,83 +20,98 @@ const props = defineProps({
 </script>
 
 <template>
-    <AuthBase
-        :code="props.code"
-    >
+    <AuthBase :code="props.code">
         <Head title="Connection" />
-        
-        <Form
-            v-bind="store.form()"
-            :reset-on-success="['password']"
-            v-slot="{ errors, processing }"
-            class="flex flex-col gap-6"
+        <div
+            class="mx-auto flex flex-row items-center justify-between md:w-[60vw]"
         >
-            <div class="grid gap-6">
-                <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
-                    <Input
-                        id="email"
-                        type="email"
-                        name="email"
-                        required
-                        autofocus
-                        :tabindex="1"
-                        autocomplete="email"
-                        placeholder="email@example.com"
-                    />
-                    <InputError :message="errors.email" />
-                </div>
-
-                <div class="grid gap-2">
-                    <div class="flex items-center justify-between">
-                        <Label for="password">Password</Label>
-                        <TextLink
-                            v-if="props.canResetPassword"
-                            :href="request()"
-                            class="text-sm"
-                            :tabindex="5"
-                        >
-                            Forgot password?
-                        </TextLink>
-                    </div>
-                    <Input
-                        id="password"
-                        type="password"
-                        name="password"
-                        required
-                        :tabindex="2"
-                        autocomplete="current-password"
-                        placeholder="Password"
-                    />
-                    <InputError :message="errors.password" />
-                </div>
-
-                <div class="flex items-center justify-between">
-                    <Label for="remember" class="flex items-center space-x-3">
-                        <Checkbox id="remember" name="remember" :tabindex="3" />
-                        <span>Remember me</span>
-                    </Label>
-                </div>
-
-                <Button
-                    type="submit"
-                    class="mt-4 w-full"
-                    :tabindex="4"
-                    :disabled="processing"
-                    data-test="login-button"
-                >
-                    <Spinner v-if="processing" />
-                    Log in
-                </Button>
-            </div>
-
-            <div
-                class="text-center text-sm text-muted-foreground"
-                v-if="props.canRegister"
+            <img
+                src="/logo/logo_login.png"
+                alt="register"
+                class="hidden w-100 md:block"
+            />
+            <Form
+                v-bind="store.form()"
+                :reset-on-success="['password']"
+                v-slot="{ errors, processing }"
+                class="flex flex-col gap-6 text-white md:w-80 md:rounded-xl md:border md:border-white/10 md:bg-white/5 md:p-8 md:shadow-[0_20px_50px_rgba(0,0,0,0.5)] md:ring-1 md:ring-white/10 md:backdrop-blur-2xl"
             >
-                Don't have an account?
-                <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
-            </div>
-        </Form>
+                <div class="grid gap-6">
+                    <div class="grid gap-2">
+                        <Label for="email">Adresse Mail</Label>
+                        <Input
+                            id="email"
+                            type="email"
+                            name="email"
+                            required
+                            autofocus
+                            :tabindex="1"
+                            autocomplete="email"
+                            placeholder="email@example.com"
+                        />
+                        <InputError :message="errors.email" />
+                    </div>
+
+                    <div class="grid gap-2">
+                        <div class="flex items-center justify-between">
+                            <Label for="password">Mot de Passe</Label>
+                            <TextLink
+                                v-if="props.canResetPassword"
+                                :href="request()"
+                                class="text-sm"
+                                :tabindex="5"
+                            >
+                                Mot de passe oublié ?
+                            </TextLink>
+                        </div>
+                        <Input
+                            id="password"
+                            type="password"
+                            name="password"
+                            required
+                            :tabindex="2"
+                            autocomplete="current-password"
+                            placeholder="Password"
+                        />
+                        <InputError :message="errors.password" />
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <Label
+                            for="remember"
+                            class="flex items-center space-x-3"
+                        >
+                            <Checkbox
+                                id="remember"
+                                name="remember"
+                                :tabindex="3"
+                            />
+                            <span>Souvenir de moi</span>
+                        </Label>
+                    </div>
+
+                    <Button
+                        type="submit"
+                        class="mt-4 w-full"
+                        :tabindex="4"
+                        :disabled="processing"
+                        data-test="login-button"
+                    >
+                        <Spinner v-if="processing" />
+                        Se connecter
+                    </Button>
+                </div>
+
+                <div
+                    class="text-center text-sm text-muted-foreground"
+                    v-if="props.canRegister"
+                >
+                    Pas encore de compte ?
+                    <TextLink :href="register()" :tabindex="5"
+                        >Cliquez ici</TextLink
+                    >
+                </div>
+            </Form>
+        </div>
     </AuthBase>
 </template>

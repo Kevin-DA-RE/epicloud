@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <AuthLayout :code="code">
+    <AuthLayout :code="props.code">
         <slot />
     </AuthLayout>
 </template>
