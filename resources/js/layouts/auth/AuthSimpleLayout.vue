@@ -16,6 +16,10 @@ switch (props.code) {
         title.value = 'Se connecter';
         description.value = 'Connection à votre compte';
         break;
+    case 'forgot_password':
+        title.value = 'Réinitialiser le mot de passe';
+        description.value = 'Renseignez votre email pour recevoir un lien de réinitialisation';
+        break;
 }
 </script>
 
@@ -29,7 +33,7 @@ switch (props.code) {
             >
                 <div class="mx-auto flex items-center justify-center">
                     <h1
-                        class="ml-2 text-4xl font-medium tracking-wide text-purple-100 md:text-5xl"
+                        class="mx-5 text-4xl font-medium tracking-wide text-purple-100 md:text-5xl"
                         style="font-family: pacifico; font-style: italic"
                     >
                         {{ title }}
@@ -37,11 +41,11 @@ switch (props.code) {
                 </div>
                 <div
                     class="mx-auto h-px w-32 bg-gradient-to-r from-transparent via-purple-400/50 to-transparent"
-                ></div>
+                ></div><span class="text-3xl drop-shadow-md filter">🔐</span>
                 <p
-                    class="text-sm font-light tracking-[0.2em] text-purple-300/60 uppercase"
+                    class="ml-5 text-sm font-light tracking-[0.2em] text-purple-300/60 uppercase"
                 >
-                    <span class="text-3xl drop-shadow-md filter">🔐</span>
+
                     {{ description }}
                 </p>
             </div>
