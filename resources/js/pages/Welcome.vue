@@ -43,7 +43,7 @@ onMounted(() => {
                     :href="dashboard()"
                     class="rounded-sm border border-[#3E3E3A] px-5 py-1.5 text-sm hover:border-[#62605b]"
                 >
-                    Dashboard
+                    EpiCloud
                 </Link>
                 <template v-else>
                     <h2
@@ -117,7 +117,7 @@ onMounted(() => {
                             class="text-center text-2xl md:text-left md:text-3xl"
                             style="font-family: pacifico; font-style: italic"
                         >
-                            Le suivi épileptique, centralisé et accessible.
+                            Bonjour et bienvenue sur Epicloud, le suivi épileptique, centralisé et accessible.
                         </h4>
 
                         <div
